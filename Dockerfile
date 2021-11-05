@@ -9,7 +9,15 @@ LABEL "com.github.actions.description"="Check ansible role or playbook with Debi
 LABEL "com.github.actions.icon"="aperture"
 LABEL "com.github.actions.color"="green"
 
-RUN apt-get update -y && apt-get install -y \
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y locales
+
+RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+    dpkg-reconfigure --frontend=noninteractive locales && \
+    update-locale LANG=en_US.UTF-8
+
+ENV LANG en_US.UTF-8
+
+RUN apt-get update -y && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     software-properties-common \
     build-essential \
     libffi-dev \
