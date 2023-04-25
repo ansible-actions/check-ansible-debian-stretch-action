@@ -19,21 +19,5 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
 
 ENV LANG en_US.UTF-8
 
-# hadolint ignore=DL3013,DL3008
-RUN apt-get update -y && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-    software-properties-common \
-    build-essential \
-    libffi-dev \
-    libssl-dev \
-    python3-dev \
-    python3-pip \
-    git \
-    systemd \
-      && apt-get clean \
-      && rm -rf /var/lib/apt/lists/* \
-      && pip3 install --no-cache-dir setuptools \
-      && pip3 install --no-cache-dir ansible \
-      && ansible --version
-
 COPY ansible-docker.sh /ansible-docker.sh
 ENTRYPOINT ["/ansible-docker.sh"]
