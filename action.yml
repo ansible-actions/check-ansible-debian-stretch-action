@@ -1,6 +1,6 @@
 ---
 name: Check Ansible Debian stretch
-description: Check ansible role or playbook with the debian:stretch docker container
+description: Checked ansible role or playbook with the debian:stretch docker container, but is now EOL
 author: L3D <l3d@c3woc.de>
 
 inputs:
@@ -56,4 +56,4 @@ runs:
     SKIPTAGS: $(( input.skiptags }}
 branding:
   icon: 'check-circle'
-  color: 'green'
+  color: 'red'
